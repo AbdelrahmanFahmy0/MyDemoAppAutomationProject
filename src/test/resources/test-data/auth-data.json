@@ -1,0 +1,11 @@
+{
+  "username": "bob@example.com",
+  "lockedUsername": "alice@example.com",
+  "password": "10203040",
+  "messages": {
+    "invalidCredentialsErrorMessage": "Provided credentials do not match any user in this service.",
+    "emptyUsernameErrorMessage": "Username is required",
+    "emptyPasswordErrorMessage": "Password is required",
+    "accountLockedErrorMessage": "Sorry, this user has been locked out."
+  }
+}

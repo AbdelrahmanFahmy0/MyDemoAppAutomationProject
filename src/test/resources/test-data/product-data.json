@@ -1,0 +1,16 @@
+{
+  "products": [
+    {
+      "name": "Sauce Labs Bolt T-Shirt",
+      "price": "15.99"
+    },
+    {
+      "name": "Sauce Labs Fleece Jacket",
+      "price": "49.99"
+    },
+    {
+      "name": "Sauce Labs Onesie",
+      "price": "7.99"
+    }
+  ]
+}

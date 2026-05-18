@@ -1,0 +1,14 @@
+{
+  "fullName": "John Doe",
+  "address": "123 Main St",
+  "city": "New York",
+  "zipCode": "12345",
+  "country": "USA",
+  "messages": {
+    "emptyFullName": "Please provide your full name.",
+    "emptyAddress": "Please provide your address.",
+    "emptyCity": "Please provide your city.",
+    "emptyZipCode": "Please provide your zip code.",
+    "emptyCountry": "Please provide your country."
+  }
+}
