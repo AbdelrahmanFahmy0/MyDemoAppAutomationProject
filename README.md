@@ -51,26 +51,22 @@ The framework is designed to automate end-to-end workflows for the MyDemoApp mob
 Before you begin, ensure you have the following installed on your system:
 
 ### System Requirements
-- **Java Development Kit (JDK)** 23 or higher
-- **Maven** 3.6.0 or higher
-- **Node.js & npm** (for Appium)
-- **Appium Server** 2.0 or higher
+- **Java Development Kit (JDK)**
+- **Maven**
+- **Node.js & npm**
+- **Appium Server**
 
 ### For Android Testing
-- **Android SDK** with API Level 23+
-- **Android Device** or **Android Emulator** (Pixel 9 recommended)
-- **ADB (Android Debug Bridge)** configured and added to PATH
-- **MyDemoApp.apk** test application
+- **Android SDK**
+- **Android Device** or **Android Emulator**
+- **ADB (Android Debug Bridge)**
+- **MyDemoApp.apk**
 
 ### For iOS Testing
-- **Xcode** 15.0 or higher (macOS only)
-- **iOS Device** or **iOS Simulator** (iPhone 16 recommended with iOS 17.0)
-- **WebDriverAgent** pre-installed on device
-- **MyDemoApp.app** test application
-
-### Additional Tools
-- **Git** for version control
-- **IDE** (IntelliJ IDEA, Eclipse, or VS Code with Java extensions)
+- **Xcode**
+- **iOS Device** or **iOS Simulator**
+- **WebDriverAgent**
+- **MyDemoApp.app**
 
 ---
 
@@ -104,19 +100,9 @@ mvn clean install
 npm install -g appium@latest
 appium driver install uiautomator2
 appium driver install xcuitest
-appium driver install chromium
 ```
 
-### 6. Start Appium Server
-```bash
-# Start Appium on default port 4723
-appium
-
-# Or specify a custom port
-appium --port 4723
-```
-
-### 7. Prepare Test Devices/Emulators
+### 6. Prepare Test Devices/Emulators
 ```bash
 # For Android - Start emulator
 emulator -avd Pixel_9
@@ -195,7 +181,7 @@ mvn test -Dplatform=ios -Dapp.type=native
 
 ### Run All Tests
 ```bash
-mvn test
+mvn clean test
 ```
 
 ### Run Specific Test Class
@@ -211,26 +197,6 @@ mvn test -Dtest=LoginTest#testValidLogin
 ### Run Tests with Custom Properties
 ```bash
 mvn test -Dplatform=android -Dapp.type=native
-```
-
-### Run Tests in Parallel
-```bash
-# Update pom.xml or use threadCount
-mvn test -DthreadCount=4
-```
-
-### Generate Allure Report
-```bash
-# Generate report after test execution
-mvn allure:report
-
-# Open the report
-mvn allure:serve
-```
-
-### Skip Tests
-```bash
-mvn clean install -DskipTests
 ```
 
 ---
@@ -306,15 +272,6 @@ After test execution, comprehensive reports are generated:
 - ⏱️ Test duration analytics
 - 🏷️ Test categorization and filtering
 
-**Generate and View Report:**
-```bash
-# Generate the report
-mvn allure:report
-
-# Start a local server and view the report
-mvn allure:serve
-```
-
 ### Test Logs
 **Location:** `test-output/Logs/logs.log`
 
@@ -332,90 +289,9 @@ Screenshots are automatically captured for:
 
 ---
 
-## 🏗️ Project Architecture
-
-### Design Patterns
-
-#### 1. Page Object Model (POM)
-```java
-// pages/ directory contains page classes
-LoginPage.java
-HomePage.java
-ProductPage.java
-CheckoutPage.java
-```
-
-Each page class encapsulates:
-- Element locators
-- User interactions
-- Business logic
-
-#### 2. BaseTest Template
-```java
-// BaseTest provides:
-- Driver initialization
-- Browser/App launch
-- Implicit/Explicit waits
-- Test setup and teardown
-- Screenshot on failure
-```
-
-#### 3. Driver Management
-```java
-// drivers/ package handles:
-- WebDriver initialization
-- Device capabilities setup
-- Wait strategies
-- Driver cleanup
-```
-
-#### 4. Listener Pattern
-```java
-// listeners/ package contains:
-- TestNG listeners
-- Allure report integration
-- Failure handling
-- Logging integration
-```
-
-### Architecture Flow
-```
-┌─────────────────┐
-│   Test Classes  │
-│  (Tests/*.java) │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Base Test      │
-│  (Setup/Config) │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Page Objects   │
-│  (POM Pattern)  │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Driver Manager │
-│  (Appium/Web)   │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Device/Browser │
-└─────────────────┘
-```
-
----
-
 ## 🎁 Framework Features
 
 ### 1. **Smart Wait Strategies**
-- Implicit waits (configurable via `waits.properties`)
-- Explicit waits with custom conditions
 - Fluent wait implementations
 - Element visibility checks
 
@@ -442,18 +318,14 @@ Each page class encapsulates:
 - Custom assertions (validations/ package)
 - Soft assertions for non-critical checks
 - Failure messages with context
-- Screenshot capture on validation failure
 
 ### 6. **Media Management**
 - Automatic screenshot capture
-- Screenshot on test failure
 - Screenshot organization by test result
 - Media file management utilities
 
 ### 7. **Error Handling**
-- Custom exception classes
 - Graceful failure handling
-- Retry mechanisms
 - Detailed error logs
 
 ### 8. **Configuration Management**
@@ -469,7 +341,6 @@ Each page class encapsulates:
 ### 1. **Login Test** (`LoginTest.java`)
 - ✅ Valid credentials login
 - ✅ Invalid credentials handling
-- ✅ Session management
 - ✅ Login error validation
 
 ### 2. **Logout Test** (`LogoutTest.java`)
@@ -481,7 +352,6 @@ Each page class encapsulates:
 ### 3. **Product Viewing** (`ViewProductTest.java`)
 - ✅ Product list display
 - ✅ Product details view
-- ✅ Product image loading
 - ✅ Product information accuracy
 
 ### 4. **Add to Cart** (`AddToCartTest.java`)
@@ -493,77 +363,27 @@ Each page class encapsulates:
 ### 5. **Product Sorting** (`SortProductsTest.java`)
 - ✅ Sort by price (ascending)
 - ✅ Sort by price (descending)
-- ✅ Sort by rating
 - ✅ Sort by name
 
 ### 6. **Shipping** (`ShippingTest.java`)
 - ✅ Shipping address entry
 - ✅ Address validation
-- ✅ Shipping method selection
 - ✅ Shipping cost calculation
 
 ### 7. **Payment** (`PaymentTest.java`)
-- ✅ Payment method selection
 - ✅ Card information entry
 - ✅ Payment validation
-- ✅ Transaction confirmation
 
 ### 8. **End-to-End Workflows** (`E2ETest.java`)
 - ✅ Complete purchase flow
 - ✅ Login → Browse → Cart → Checkout → Payment
 - ✅ Order confirmation
-- ✅ Email receipt
 
 ---
 
-## 📧 Support & Contact
+## 🤝 Contributions
 
-### Issues & Bug Reports
-- 📝 Create an issue on GitHub with detailed steps to reproduce
-- 📸 Include screenshots/logs from `test-output/`
-- 📋 Specify platform (Android/iOS) and device details
-
-### Contributing
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-### Documentation
-- 📖 For Appium: [Appium Documentation](http://appium.io/)
-- 📖 For TestNG: [TestNG Documentation](https://testng.org/)
-- 📖 For Allure: [Allure Framework](https://docs.qameta.io/allure/)
-
-### Project Team
-- **Project Owner**: MyDemo QA Team
-- **Maintainers**: Automation Engineers
-- **Contributors**: Quality Assurance Team
-
----
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
-## 🙏 Acknowledgments
-
-- Appium community for excellent mobile automation tools
-- TestNG for robust testing framework
-- Allure for comprehensive reporting solution
-- Maven community for build management
-
----
-
-## 🔗 Useful Links
-
-- [Appium Documentation](http://appium.io/docs/en/about-appium/intro/)
-- [TestNG User Guide](https://testng.org/doc/documentation-main.html)
-- [Allure Report Documentation](https://docs.qameta.io/allure/)
-- [Log4j2 Documentation](https://logging.apache.org/log4j/2.x/)
-- [Maven Getting Started](https://maven.apache.org/guides/getting-started/)
+   Contributions are welcome! Please fork the repository and create a pull request.
 
 ---
 
@@ -571,7 +391,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 **Built with ❤️ for Quality Assurance**
 
-Last Updated: May 18, 2026 | Version: 1.0-SNAPSHOT
-
 </div>
-
